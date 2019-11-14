@@ -13,6 +13,11 @@ hello: hello.S
 	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
 		-Uflash:w:hello.S.hex:i
 
+fifo: fifo.S     
+	avra -fM fifo.S    
+	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
+		-Uflash:w:fifo.S.hex:i
+
 read_fuses:
 	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
 		-Ulfuse:r:-:i -Uhfuse:r:-:i -Uefuse:r:-:i
