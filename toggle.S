@@ -78,27 +78,23 @@ setup:
 
   sbi DDRC, DDC5
   sbi PORTB, PORTB0; set PB0 as input_pullup
-  ;sbi  PORTC, PORTC5
-  ;ldi r20,0x40; A?
   ldi r18,1
 
 loop:
   cpi r17, 0x31 ; "1"
-  breq light
-  rjmp loop ;do absolutely nothing
+  breq light 
+  jmp loop ;do absolutely nothing
 
 light:
   clr r17 ; clear r17
   cpi r18,1
-  breq on
-  rjmp off
+  breq on             ;if r18=1, goto on
+  inc r18             ;else increment from 0 to 1
+  cbi PORTC, PORTC5   ;and turn off the LED
+  jmp loop           ;back to loop
 
 on:
   dec r18
   sbi PORTC, PORTC5
-  rjmp loop
+  jmp loop
 
-off:
-  inc r18
-  cbi PORTC, PORTC5
-  rjmp loop

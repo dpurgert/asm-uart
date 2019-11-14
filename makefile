@@ -3,10 +3,15 @@ mirror: mirror.S
 	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
 		-Uflash:w:mirror.S.hex:i
 
-toggle: hello.S     
+toggle: toggle.S     
 	avra -fM toggle.S    
 	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
 		-Uflash:w:toggle.S.hex:i
+
+hello: hello.S     
+	avra -fM hello.S    
+	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
+		-Uflash:w:hello.S.hex:i
 
 read_fuses:
 	avrdude -e -patmega88p -carduino -P/dev/ttyUSB0 -b19200 \
